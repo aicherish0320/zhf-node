@@ -13,5 +13,9 @@
   "devDependencies": {
     "@koa/router": "^10.1.1",
     "koa": "^2.13.4"
+  },
+  "dependencies": {
+    "koa-session": "^6.2.0",
+    "uuid": "^8.3.2"
   }
 }
