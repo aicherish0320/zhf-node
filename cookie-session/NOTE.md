@@ -37,3 +37,4 @@
 - gzip 压缩
 - 缓存，强制缓存、协商缓存，预加载
 - localStorage 来存储 js 文件
+  l,
