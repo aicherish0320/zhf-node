@@ -1,4 +1,6 @@
 const http = require('http')
+// 第三方模块 express 中自带这个模块
+const methods = require('methods')
 // 引入路由系统
 const Router = require('../router')
 
@@ -7,11 +9,14 @@ const Router = require('../router')
 function Application() {
   this.router = new Router()
 }
-// app.get()
-Application.prototype.get = function (path, ...handlers) {
-  // 向路由系统中添加
-  this.router.get(path, handlers)
-}
+
+methods.forEach((m) => {
+  Application.prototype[m] = function (path, ...handlers) {
+    // 向路由系统中添加
+    this.router[m](path, handlers)
+  }
+})
+
 // app.listener
 Application.prototype.listen = function (...args) {
   const server = http.createServer((req, res) => {

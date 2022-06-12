@@ -5,13 +5,13 @@ const app = express()
 // 路由中间件功能
 // 例如：当我访问 / 的时候，需要判断用户权限，如果是某个权限做某件事，最终相应的结果
 
-const auth = (req, res, next) => {
-  if (req.query.auth === '1') {
-    next()
-  } else {
-    res.end('no auth')
-  }
-}
+// const auth = (req, res, next) => {
+//   if (req.query.auth === '1') {
+//     next()
+//   } else {
+//     res.end('no auth')
+//   }
+// }
 
 // app.get('/', auth, (req, res, next) => {
 //   res.end('home ok')
@@ -30,15 +30,13 @@ app.get(
   },
   (req, res, next) => {
     console.log(3)
-    next()
-    console.log(4)
+    res.end('ok-get')
   }
 )
-app.get('/profile', (req, res, next) => {
+
+app.post('/register', (req, res, next) => {
   console.log(5)
-  // next()
-  // console.log(6)
-  res.end('ok2')
+  res.end('ok-post')
 })
 
 // ! 老的方式 已废弃
