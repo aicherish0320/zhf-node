@@ -34,13 +34,19 @@ methods.forEach((m) => {
 Router.prototype.handle = function (req, res, done) {
   // 要在路由的栈中查找，找不到就找下一个，找到了将下一个的执行权限传递进去
   const { pathname } = url.parse(req.url)
+  const method = req.method.toLowerCase()
   let i = 0
   const next = () => {
     // 整个栈都筛了一遍没有找到，交给应用来处理
     if (i === this.stack.length) return done
     const layer = this.stack[i++]
     if (layer.match(pathname)) {
-      layer.handleRequest(req, res, next) // route.dispatch
+      if (layer.route.methods[method]) {
+        // route.dispatch
+        layer.handleRequest(req, res, next)
+      } else {
+        next()
+      }
     } else {
       next()
     }

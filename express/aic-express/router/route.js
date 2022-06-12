@@ -3,6 +3,8 @@ const methods = require('methods')
 
 function Route() {
   this.stack = []
+  // 用来标识 route 上包含哪些方法
+  this.methods = {}
 }
 
 Route.prototype.dispatch = function (req, res, out) {
@@ -27,6 +29,7 @@ methods.forEach((m) => {
       const layer = new Layer('', handler)
       // 给每一层都添加一个方法
       layer.method = m
+      this.methods[m] = true
       this.stack.push(layer)
     })
   }
