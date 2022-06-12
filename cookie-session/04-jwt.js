@@ -15,7 +15,7 @@ const app = new Koa()
 
 const router = new Router()
 
-const secret = 'aicherish'
+const secret = 'zf'
 
 const jwt = {
   sign(content, secret) {
@@ -37,7 +37,7 @@ const jwt = {
     return str.replace(/\=/g, '').replace(/\+/g, '-').replace(/\//, '_')
   },
   encode(info, secret) {
-    const head = this.toBase64({ typ: 'jwt', alg: 'HS256' })
+    const head = this.toBase64({ typ: 'JWT', alg: 'HS256' })
     const content = this.toBase64(info)
     const sign = this.sign([head, content].join('.'), secret)
     return head + '.' + content + '.' + sign
@@ -56,7 +56,7 @@ const jwt = {
 }
 
 router.post('/login', async (ctx) => {
-  let user = { id: 100, username: 'jack' }
+  let user = { id: '110', username: 'zs' }
 
   // 生成令牌的数据不要太多，一般情况下用用户的 id 就可以了
   const token = jwt.encode(user, secret)
