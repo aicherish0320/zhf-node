@@ -8,9 +8,9 @@ function Application() {
   this.router = new Router()
 }
 // app.get()
-Application.prototype.get = function (path, handler) {
+Application.prototype.get = function (path, ...handlers) {
   // 向路由系统中添加
-  this.router.get(path, handler)
+  this.router.get(path, handlers)
 }
 // app.listener
 Application.prototype.listen = function (...args) {
